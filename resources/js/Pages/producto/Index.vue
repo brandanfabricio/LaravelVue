@@ -52,6 +52,12 @@ const DeleteProducto = (id: number) => {
                                     <td class="whitespace-nowrap px-6 py-4">{{ pro.descripcion }}</td>
                                     <td class="whitespace-nowrap px-6 py-4">{{ pro.precio }}</td>
                                     <td class="whitespace-nowrap px-6 py-4">{{ pro.stock }}</td>
+                                    <td class="border border-gray-400 px-4 py-4">
+                                        <Link :href="route('producto.edit', pro.id)"
+                                            :class="'px-4 py-2 bg-yellow-400 text-white border rounded-md font-semibold text-xs'">
+                                        <i class="fa-solid fa-edit"></i>
+                                        </Link>
+                                    </td>
                                     <td class="whitespace-nowrap px-6 py-4">
                                         <DangerButton @click="DeleteProducto(pro.id)">
                                             <i class="fa-solid fa-trash"></i>

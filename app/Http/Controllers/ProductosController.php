@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Productos;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
-use Symfony\Component\Routing\Router;
 
 class ProductosController extends Controller
 {
@@ -17,7 +16,7 @@ class ProductosController extends Controller
         //
         $productos = Productos::all();
 
-        return Inertia::render('producto/Index',['producto' => $productos]);
+        return Inertia::render('producto/Index', ['producto' => $productos]);
 
     }
 
@@ -35,11 +34,12 @@ class ProductosController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate(['nombre'=>'required']);
+        $request->validate(['nombre' => 'required']);
         $prducto = new Productos($request->input());
         $prducto->save();
         // return redirect('producto/Index');
         return redirect('producto/Index');
+
 
     }
 
@@ -49,38 +49,42 @@ class ProductosController extends Controller
     public function show(Productos $productos)
     {
         //
+
+
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Productos $productos)
+    public function edit(Productos $producto)
     {
-        
+        //  dd($producto);
+        return Inertia::render('producto/Edit', ['producto' => $producto]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Productos $productos)
+    public function update(Request $request, Productos $producto)
     {
-        $request->validate(['nombre'=>'required']);
-        $prducto = new Productos($request->all());
-        $prducto->save();
-        return Inertia::render('producto/Index');
+        $request->validate(['nombre' => 'required']);
+        $producto->update($request->all());
+
+        return redirect('producto/Index');
 
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Productos $productos)
+    public function destroy(Productos $producto)
     {
         //}
-        $productos->delete();
+        // dd($producto);
+        $producto->delete();
         return redirect('producto/Index');
 
-        
-        
+
+
     }
 }
